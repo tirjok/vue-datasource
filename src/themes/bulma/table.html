@@ -1,0 +1,82 @@
+<div class="vue-datasource-bulma">
+    <nav class="panel">
+        <div class="panel-heading">
+            <div class="columns">
+                <div class="column">
+                    <div class="control is-horizontal is-pulled-left">
+                        <div class="control-label">
+                            {{ translation.table.label_limits }}
+                        </div>
+                        <div class="select">
+                            <select v-model="perpage" number>
+                                <option v-for="limit in limits" :value="limit">{{ limit }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <p class="control has-addons is-pulled-right">
+                        <input class="input is-medium" type="text"
+                            v-model="search"
+                            :placeholder="translation.table.placeholder_search">
+                        <a class="button is-info is-medium" @click.prevent="searching">{{ translation.table.label_search }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-block">
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <!--columns-->
+                        <th v-for="column in columns">{{ column.name }}</th>
+                        <!--/columns-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-if="pagination.total == 0">
+                        <td :colspan="columns.length">{{ translation.table.records_not_found }}</td>
+                    </tr>
+                    <!--rows-->
+                    <tr v-else
+                        :class="{ 'success': (index == indexSelected) }"
+                        v-for="(row, index) in tableData"
+                        @click.prevent="selectRow(row, index)">
+                        <td v-for="k in columns">
+                            {{ fetchFromObject(row, k.key, k.render) }}
+                        </td>
+                    </tr>
+                    <!--/rows-->
+                    <tr>
+                        <!--info-table-->
+                        <td class="text-center" :colspan="columns.length">
+                            {{ tableInfo }}
+                        </td>
+                        <!--/info-table-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-heading">
+            <div class="columns">
+                <div class="column vue-actions">
+                    <!--actions-buttons-->
+                    <a class="button is-primary"
+                        :class="btn.class"
+                        v-for="btn in actions"
+                        @click="btn.event($event, selected)">{{ btn.text }}</a>
+                    <!--/actions-buttons-->
+                </div>
+                <div class="column">
+                     <!--pagination-->
+                    <pagination 
+                        :pages="pagination" 
+                        :translation="translation.pagination" 
+                        @change="changePage"
+                        :theme="theme"></pagination>
+                    <!--/pagination-->
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

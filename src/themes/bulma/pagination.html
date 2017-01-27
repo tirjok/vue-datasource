@@ -1,0 +1,23 @@
+<div class="Vue__pagination">
+  <nav class="pagination is-centered" aria-label="Page navigation">
+    <!-- Previous -->
+    <a 
+      class="pagination-previous"
+      :class="(pages.current_page == 1) ? 'is-disabled' : ''"
+      @click.prevent="previous">Previous</a> 
+    <!-- /Previous -->
+    <!-- Next -->
+    <a 
+      class="pagination-next"
+      :class="(pages.current_page == pages.last_page) ? 'is-disabled' : ''"
+      @click.prevent="previous">Next</a>
+    <!-- /Next -->
+    <!-- Pagination-Items -->
+    <ul class="pagination-list">
+      <li v-for="n in items">
+        <a class="pagination-link" :class="(pages.current_page == n) ? 'is-current': ''" href="#" @click.prevent="change(n)">{{ n }}</a>
+      </li>
+    </ul>
+    <!-- /Pagination-Items -->
+  </nav>
+</div>
