@@ -1,33 +1,9 @@
-<template>
-    <div class="Vue__pagination">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li :class="(pages.current_page == 1) ? 'disabled' : ''">
-                    <a href="#" @click.prevent="firstPage">{{ translation.btn_first }}</a>
-                </li>
-                <li :class="(pages.current_page == 1) ? 'disabled' : ''">
-                    <a href="#" @click.prevent="previous" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li v-for="n in items" :class="(pages.current_page == n) ? 'active': ''">
-                    <a href="#" @click.prevent="change(n)">{{ n }}</a>
-                </li>
-                <li :class="(pages.current_page == pages.last_page) ? 'disabled' : ''">
-                    <a href="#" @click.prevent="next" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <li :class="(pages.current_page == pages.last_page) ? 'disabled' : ''">
-                    <a href="#" @click.prevent="lastPage(pages.last_page)">{{ translation.btn_last }}</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</template>
 <script type="text/babel">
     export default {
-        props: ['pages', 'translation'],
+        props: ['pages', 'translation', 'theme'],
+        created() {
+            this.$options.template = require(`../themes/${this.theme}/pagination.html`)
+        },
         computed: {
             items() {
                 let temp = [],
