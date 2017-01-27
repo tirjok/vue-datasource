@@ -1,0 +1,84 @@
+<div class="vue-datasource-b4">
+    <div class="card">
+        <div class="card-header">
+            <div class="row form-inline clearfix">
+                <!--limits-->
+                <div class="col-6 form-group">
+                    <label class="control-label pr2">{{ translation.table.label_limits }}</label>
+                    <select class="form-control" v-model="perpage" number>
+                        <option v-for="limit in limits" :value="limit">{{ limit }}</option>
+                    </select>
+                </div><!--/limits-->
+                <div class="col-6">
+                    <!--search-input-->
+                    <div class="form-group float-right">
+                        <input class="form-control" type="text"
+                            v-model="search"
+                            :placeholder="translation.table.placeholder_search">
+                        <button type="button" class="btn btn-primary"
+                            @click.prevent="searching">{{ translation.table.label_search }}</button>
+                    </div><!--/search-input-->
+                </div>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped Vue__table">
+                <thead>
+                    <tr>
+                        <!--columns-->
+                        <th v-for="column in columns">{{ column.name }}</th>
+                        <!--/columns-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-if="pagination.total == 0">
+                        <td :colspan="columns.length">{{ translation.table.records_not_found }}</td>
+                    </tr>
+                    <!--rows-->
+                    <tr v-else
+                        :class="{ 'table-success': (index == indexSelected) }"
+                        v-for="(row, index) in tableData"
+                        @click.prevent="selectRow(row, index)">
+                        <td v-for="k in columns">
+                            {{ fetchFromObject(row, k.key, k.render) }}
+                        </td>
+                    </tr>
+                    <!--/rows-->
+                    <tr>
+                        <!--info-table-->
+                        <td class="text-center" :colspan="columns.length">
+                            {{ tableInfo }}
+                        </td>
+                        <!--/info-table-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-6">
+                    <!--actions-buttons-->
+                    <div class="btn-group ">
+                        <button class="btn btn-default" type="button"
+                            :class="btn.class"
+                            v-for="btn in actions"
+                            @click="btn.event($event, selected)">
+                            <i class="pr1" v-if="btn.icon" :class="btn.icon"></i>
+                            {{ btn.text }}
+                        </button>
+                    </div>
+                    <!--/actions-buttons-->
+                </div>
+                <div class="col-6">
+                    <!--pagination-->
+                    <pagination 
+                        :pages="pagination" 
+                        :translation="translation.pagination" 
+                        @change="changePage"
+                        :theme="theme"></pagination>
+                    <!--/pagination-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

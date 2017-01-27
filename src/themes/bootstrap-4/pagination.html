@@ -1,0 +1,25 @@
+<div>
+  <nav aria-label="Page navigation" class="float-right">
+    <ul class="pagination">
+      <li class="page-item" :class="(pages.current_page == 1) ? 'disabled' : ''">
+        <a class="page-link" href="#" @click.prevent="firstPage">{{ translation.btn_first }}</a>
+      </li>
+      <li class="page-item" :class="(pages.current_page == 1) ? 'disabled' : ''">
+        <a class="page-link" href="#" @click.prevent="previous" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item" v-for="n in items" :class="(pages.current_page == n) ? 'active': ''">
+        <a class="page-link" href="#" @click.prevent="change(n)">{{ n }}</a>
+      </li>
+      <li class="page-item" :class="(pages.current_page == pages.last_page) ? 'disabled' : ''">
+        <a class="page-link" href="#" @click.prevent="next" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li class="page-item" :class="(pages.current_page == pages.last_page) ? 'disabled' : ''">
+        <a class="page-link" href="#" @click.prevent="lastPage(pages.last_page)">{{ translation.btn_last }}</a>
+      </li>
+    </ul>
+  </nav>
+</div>
