@@ -35,7 +35,7 @@
         </div><!--/search-input-->
       </nav>
 
-      <table class="table is-striped Vue__table">
+      <table class="table is-narrow">
         <thead>
         <tr>
           <!--columns-->
@@ -199,3 +199,9 @@
     }
   }
 </script>
+
+<style>
+  .success {
+    background-color: lightgreen;
+  }
+</style>
