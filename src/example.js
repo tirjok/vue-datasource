@@ -149,7 +149,7 @@ new Vue({
         },
         {
           text: 'Show',
-          icon: 'fa fa-eye-open',
+          icon: 'fa fa-eye',
           class: 'is-info',
           event(e, row) {
             console.warn('Are you clicked me?', e);

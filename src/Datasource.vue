@@ -38,44 +38,44 @@
 
         </div><!--/search-input-->
       </nav>
-      <div class="card">
-        <div class="card-content">
-          <table class="table is-striped Vue__table">
-            <thead>
-            <tr>
-              <!--columns-->
-              <th v-for="column in columns">{{ column.name }}</th>
-              <!--/columns-->
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-if="pagination.total == 0">
-              <td :colspan="columns.length">{{ translation.table.records_not_found }}</td>
-            </tr>
-            <!--rows-->
-            <tr v-else
-                :class="{ 'success': (index == indexSelected) }"
-                v-for="(row, index) in tableData"
-                @click.prevent="selectRow(row, index)">
-              <td v-for="k in columns">
-                {{ fetchFromObject(row, k.key, k.render) }}
-              </td>
-            </tr>
-            <!--/rows-->
-            <tr>
-              <!--info-table-->
-              <td class="text-center" :colspan="columns.length">
-                {{ tableInfo }}
-              </td>
-              <!--/info-table-->
-            </tr>
-            </tbody>
-          </table>
-        </div>
 
-        <footer class="card-footer">
-          <div class="is-pulled-left">
-            <!--actions-buttons-->
+      <table class="table is-striped Vue__table">
+        <thead>
+        <tr>
+          <!--columns-->
+          <th v-for="column in columns">{{ column.name }}</th>
+          <!--/columns-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-if="pagination.total == 0">
+          <td :colspan="columns.length">{{ translation.table.records_not_found }}</td>
+        </tr>
+        <!--rows-->
+        <tr v-else
+            :class="{ 'success': (index == indexSelected) }"
+            v-for="(row, index) in tableData"
+            @click.prevent="selectRow(row, index)">
+          <td v-for="k in columns">
+            {{ fetchFromObject(row, k.key, k.render) }}
+          </td>
+        </tr>
+        <!--/rows-->
+        <tr>
+          <!--info-table-->
+          <td class="text-center" :colspan="columns.length">
+            {{ tableInfo }}
+          </td>
+          <!--/info-table-->
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- Main container -->
+      <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+          <div class="level-item">
             <div class="field has-addons">
               <p class="control" v-for="btn in actions">
                 <a class="button" :class="btn.class" @click="btn.event($event, selected)">
@@ -86,17 +86,16 @@
                 </a>
               </p>
             </div>
-            <!--/actions-buttons-->
           </div>
-          <div class="is-pulled-right">
-            <!--pagination-->
-            <pagination :pages="pagination" :translation="translation.pagination" @change="changePage"></pagination>
-            <!--/pagination-->
-          </div>
+        </div>
 
-          <div class="is-clearfix"></div>
-        </footer>
-      </div>
+        <!-- Right side -->
+        <div class="level-right">
+          <p class="level-item">
+            <pagination :pages="pagination" :translation="translation.pagination" @change="changePage"></pagination>
+          </p>
+        </div>
+      </nav>
     </div>
   </div>
 </template>
@@ -206,23 +205,3 @@
     }
   }
 </script>
-<style lang="sass" scoped>
-  .vue-datasource {
-
-  .Vue__panel-body {
-    padding: 0;
-
-  .Vue__table {
-    margin-bottom: 0;
-  }
-
-  }
-  .Vue__panel-footer {
-
-  .Vue__datasource_actions {
-    margin: 10px 0;
-  }
-
-  }
-  }
-</style>
