@@ -1,29 +1,37 @@
 <template>
-  <div class="Vue__pagination">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li :class="(pages.current_page == 1) ? 'disabled' : ''">
-          <a href="#" @click.prevent="firstPage">{{ translation.btn_first }}</a>
-        </li>
-        <li :class="(pages.current_page == 1) ? 'disabled' : ''">
-          <a href="#" @click.prevent="previous" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li v-for="n in items" :class="(pages.current_page == n) ? 'active': ''">
-          <a href="#" @click.prevent="change(n)">{{ n }}</a>
-        </li>
-        <li :class="(pages.current_page == pages.last_page) ? 'disabled' : ''">
-          <a href="#" @click.prevent="next" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-        <li :class="(pages.current_page == pages.last_page) ? 'disabled' : ''">
-          <a href="#" @click.prevent="lastPage(pages.last_page)">{{ translation.btn_last }}</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <nav class="pagination is-right" aria-label="Page pagination">
+    <ul class="pagination-list">
+      <li>
+        <a class="pagination-link" href="#" @click.prevent="firstPage" :disabled="pages.current_page == 1">
+          {{ translation.btn_first }}
+        </a>
+      </li>
+      <li>
+        <a class="pagination-link" href="#" @click.prevent="previous"
+           :disabled="pages.current_page == 1"
+           aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li v-for="n in items">
+        <a class="pagination-link" :class="(pages.current_page == n) ? 'is-current': ''"
+           href="#" @click.prevent="change(n)">{{ n }}</a>
+      </li>
+      <li>
+        <a class="pagination-link" href="#" @click.prevent="next"
+           :disabled="pages.current_page === pages.last_page"
+           aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li>
+        <a class="pagination-link" href="#" @click.prevent="lastPage(pages.last_page)"
+           :disabled="pages.current_page === pages.last_page">
+          {{ translation.btn_last }}
+        </a>
+      </li>
+    </ul>
+  </nav>
 </template>
 <script type="text/babel">
   export default {
@@ -102,15 +110,3 @@
     }
   }
 </script>
-<style lang="sass" scoped>
-  .Vue__pagination {
-
-  nav {
-
-  .pagination {
-    margin: 10px 0 !important;
-  }
-
-  }
-  }
-</style>

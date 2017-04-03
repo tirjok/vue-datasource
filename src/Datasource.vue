@@ -1,80 +1,101 @@
 <template>
   <div class="vue-datasource">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="form-inline">
-          <!--limits-->
-          <div class="form-group pull-left">
-            <label class="control-label pr2">{{ translation.table.label_limits }}</label>
-            <select class="form-control" v-model="perpage" number>
-              <option v-for="limit in limits" :value="limit">{{ limit }}</option>
-            </select>
-          </div><!--/limits-->
-          <!--search-input-->
-          <div class="form-group pull-right">
-            <input class="form-control" type="text"
-                   v-model="search"
-                   :placeholder="translation.table.placeholder_search">
-            <button type="button" class="btn btn-primary"
-                    @click.prevent="searching">{{ translation.table.label_search }}
-            </button>
-          </div><!--/search-input-->
-          <div class="clearfix"></div>
-        </div>
-      </div>
-      <div class="panel-body Vue__panel-body">
-        <table class="table table-striped Vue__table">
-          <thead>
-          <tr>
-            <!--columns-->
-            <th v-for="column in columns">{{ column.name }}</th>
-            <!--/columns-->
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-if="pagination.total == 0">
-            <td :colspan="columns.length">{{ translation.table.records_not_found }}</td>
-          </tr>
-          <!--rows-->
-          <tr v-else
-              :class="{ 'success': (index == indexSelected) }"
-              v-for="(row, index) in tableData"
-              @click.prevent="selectRow(row, index)">
-            <td v-for="k in columns">
-              {{ fetchFromObject(row, k.key, k.render) }}
-            </td>
-          </tr>
-          <!--/rows-->
-          <tr>
-            <!--info-table-->
-            <td class="text-center" :colspan="columns.length">
-              {{ tableInfo }}
-            </td>
-            <!--/info-table-->
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="panel-footer Vue__panel-footer">
-        <div class="pull-left">
-          <!--actions-buttons-->
-          <div class="btn-group Vue__datasource_actions">
-            <button class="btn btn-default" type="button"
-                    :class="btn.class"
-                    v-for="btn in actions"
-                    @click="btn.event($event, selected)">
-              <i class="pr1" v-if="btn.icon" :class="btn.icon"></i>
-              {{ btn.text }}
-            </button>
+    <div class="box">
+      <nav class="level">
+        <!--limits-->
+        <div class="level-left">
+          <div class="level-item">
+            <p class="subtitle is-5">
+              <strong>{{ translation.table.label_limits }}</strong>
+            </p>
           </div>
-          <!--/actions-buttons-->
+          <div class="level-item">
+             <p class="select">
+               <select v-model="perpage" number>
+                 <option v-for="limit in limits" :value="limit">{{ limit }}</option>
+               </select>
+             </p>
+          </div>
+
+        </div><!--/limits-->
+        <!--search-input-->
+        <div class="level-right">
+          <div class="level-item">
+            <div class="field has-addons">
+              <p class="control">
+                <input class="input" type="text"
+                       v-model="search"
+                       :placeholder="translation.table.placeholder_search">
+              </p>
+
+              <p class="control">
+                <button type="button" class="button is-primary"
+                        @click.prevent="searching">{{ translation.table.label_search }}
+                </button>
+              </p>
+            </div>
+          </div>
+
+        </div><!--/search-input-->
+      </nav>
+      <div class="card">
+        <div class="card-content">
+          <table class="table is-striped Vue__table">
+            <thead>
+            <tr>
+              <!--columns-->
+              <th v-for="column in columns">{{ column.name }}</th>
+              <!--/columns-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-if="pagination.total == 0">
+              <td :colspan="columns.length">{{ translation.table.records_not_found }}</td>
+            </tr>
+            <!--rows-->
+            <tr v-else
+                :class="{ 'success': (index == indexSelected) }"
+                v-for="(row, index) in tableData"
+                @click.prevent="selectRow(row, index)">
+              <td v-for="k in columns">
+                {{ fetchFromObject(row, k.key, k.render) }}
+              </td>
+            </tr>
+            <!--/rows-->
+            <tr>
+              <!--info-table-->
+              <td class="text-center" :colspan="columns.length">
+                {{ tableInfo }}
+              </td>
+              <!--/info-table-->
+            </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="pull-right">
-          <!--pagination-->
-          <pagination :pages="pagination" :translation="translation.pagination" @change="changePage"></pagination>
-          <!--/pagination-->
-        </div>
-        <div class="clearfix"></div>
+
+        <footer class="card-footer">
+          <div class="is-pulled-left">
+            <!--actions-buttons-->
+            <div class="field has-addons">
+              <p class="control" v-for="btn in actions">
+                <a class="button" :class="btn.class" @click="btn.event($event, selected)">
+                  <span class="icon is-small" v-if="btn.icon">
+                    <i :class="btn.icon"></i>
+                  </span>
+                  <span>{{ btn.text }}</span>
+                </a>
+              </p>
+            </div>
+            <!--/actions-buttons-->
+          </div>
+          <div class="is-pulled-right">
+            <!--pagination-->
+            <pagination :pages="pagination" :translation="translation.pagination" @change="changePage"></pagination>
+            <!--/pagination-->
+          </div>
+
+          <div class="is-clearfix"></div>
+        </footer>
       </div>
     </div>
   </div>

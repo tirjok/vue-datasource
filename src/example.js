@@ -123,8 +123,8 @@ new Vue({
       actions: [
         {
           text: 'Edit',
-          icon: 'glyphicon glyphicon-pencil',
-          class: 'btn-primary',
+          icon: 'fa fa-edit',
+          class: 'is-primary',
           event(e, row) {
             console.warn('Did clicked me?', e);
             if (row == null) {
@@ -136,8 +136,8 @@ new Vue({
         },
         {
           text: 'Delete',
-          icon: 'glyphicon glyphicon-trash',
-          class: 'btn-danger',
+          icon: 'fa fa-trash',
+          class: 'is-danger',
           event(e, row) {
             console.warn('Are you clicked me?', e);
             if (row == null) {
@@ -149,8 +149,8 @@ new Vue({
         },
         {
           text: 'Show',
-          icon: 'glyphicon glyphicon-eye-open',
-          class: 'btn-info',
+          icon: 'fa fa-eye-open',
+          class: 'is-info',
           event(e, row) {
             console.warn('Are you clicked me?', e);
             if (row == null) {
