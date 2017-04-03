@@ -1,9 +1,9 @@
 <template>
   <div class="vue-datasource">
     <div class="box">
-      <nav class="level">
+      <nav class="level structure-item is-structure-container">
         <!--limits-->
-        <div class="level-left">
+        <div class="level-left structure-item">
           <div class="level-item">
             <p class="subtitle is-5">
               <strong>{{ translation.table.label_limits }}</strong>
@@ -21,19 +21,15 @@
         <!--search-input-->
         <div class="level-right">
           <div class="level-item">
-            <div class="field has-addons">
-              <p class="control">
-                <input class="input" type="text"
-                       v-model="search"
-                       :placeholder="translation.table.placeholder_search">
-              </p>
+            <p class="control has-addons">
+              <input class="input" type="text"
+                     v-model="search"
+                     :placeholder="translation.table.placeholder_search">
 
-              <p class="control">
-                <button type="button" class="button is-primary"
-                        @click.prevent="searching">{{ translation.table.label_search }}
-                </button>
-              </p>
-            </div>
+              <button type="button" class="button is-primary"
+                      @click.prevent="searching">{{ translation.table.label_search }}
+              </button>
+            </p>
           </div>
 
         </div><!--/search-input-->
@@ -76,15 +72,13 @@
         <!-- Left side -->
         <div class="level-left">
           <div class="level-item">
-            <div class="field has-addons">
-              <p class="control" v-for="btn in actions">
-                <a class="button" :class="btn.class" @click="btn.event($event, selected)">
+            <div class="control has-addons">
+              <a v-for="btn in actions" class="button" :class="btn.class" @click="btn.event($event, selected)">
                   <span class="icon is-small" v-if="btn.icon">
                     <i :class="btn.icon"></i>
                   </span>
-                  <span>{{ btn.text }}</span>
-                </a>
-              </p>
+                <span>{{ btn.text }}</span>
+              </a>
             </div>
           </div>
         </div>

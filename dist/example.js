@@ -711,9 +711,9 @@
 	  }, [_c('div', {
 	    staticClass: "box"
 	  }, [_c('nav', {
-	    staticClass: "level"
+	    staticClass: "level structure-item is-structure-container"
 	  }, [_c('div', {
-	    staticClass: "level-left"
+	    staticClass: "level-left structure-item"
 	  }, [_c('div', {
 	    staticClass: "level-item"
 	  }, [_c('p', {
@@ -753,10 +753,8 @@
 	    staticClass: "level-right"
 	  }, [_c('div', {
 	    staticClass: "level-item"
-	  }, [_c('div', {
-	    staticClass: "field has-addons"
 	  }, [_c('p', {
-	    staticClass: "control"
+	    staticClass: "control has-addons"
 	  }, [_c('input', {
 	    directives: [{
 	      name: "model",
@@ -778,9 +776,7 @@
 	        _vm.search = $event.target.value
 	      }
 	    }
-	  })]), _vm._v(" "), _c('p', {
-	    staticClass: "control"
-	  }, [_c('button', {
+	  }), _vm._v(" "), _c('button', {
 	    staticClass: "button is-primary",
 	    attrs: {
 	      "type": "button"
@@ -791,7 +787,7 @@
 	        _vm.searching($event)
 	      }
 	    }
-	  }, [_vm._v(_vm._s(_vm.translation.table.label_search) + "\n              ")])])])])])]), _vm._v(" "), _c('table', {
+	  }, [_vm._v(_vm._s(_vm.translation.table.label_search) + "\n            ")])])])])]), _vm._v(" "), _c('table', {
 	    staticClass: "table is-striped Vue__table"
 	  }, [_c('thead', [_c('tr', _vm._l((_vm.columns), function(column) {
 	    return _c('th', [_vm._v(_vm._s(column.name))])
@@ -825,11 +821,9 @@
 	  }, [_c('div', {
 	    staticClass: "level-item"
 	  }, [_c('div', {
-	    staticClass: "field has-addons"
+	    staticClass: "control has-addons"
 	  }, _vm._l((_vm.actions), function(btn) {
-	    return _c('p', {
-	      staticClass: "control"
-	    }, [_c('a', {
+	    return _c('a', {
 	      staticClass: "button",
 	      class: btn.class,
 	      on: {
@@ -841,7 +835,7 @@
 	      staticClass: "icon is-small"
 	    }, [_c('i', {
 	      class: btn.icon
-	    })]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(btn.text))])])])
+	    })]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(btn.text))])])
 	  }))])]), _vm._v(" "), _c('div', {
 	    staticClass: "level-right"
 	  }, [_c('p', {
