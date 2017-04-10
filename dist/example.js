@@ -901,7 +901,7 @@
 	      class: btn.class,
 	      on: {
 	        "click": function($event) {
-	          btn.event($event, _vm.selected)
+	          btn.event($event, _vm.selected, this)
 	        }
 	      }
 	    }, [(btn.icon) ? _c('span', {

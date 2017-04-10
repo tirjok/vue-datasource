@@ -73,7 +73,7 @@
         <div class="level-left">
           <div class="level-item">
             <div class="control has-addons">
-              <a v-for="btn in actions" class="button" :class="btn.class" @click="btn.event($event, selected)">
+              <a v-for="btn in actions" class="button" :class="btn.class" @click="btn.event($event, selected, this)">
                   <span class="icon is-small" v-if="btn.icon">
                     <i :class="btn.icon"></i>
                   </span>
